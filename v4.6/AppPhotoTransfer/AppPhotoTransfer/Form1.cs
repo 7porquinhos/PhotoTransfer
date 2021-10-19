@@ -251,12 +251,20 @@ namespace AppPhotoTransfer
                 MainInfo.FCInfo().EscreverConsoleLog("Copia Iniciada...", TipoConsoleLog.Info);
                 foreach (FileInfo f in dir.GetFiles("*.jpg"))
                 {
-                    if (f.LastWriteTime.Hour > DateTime.Parse(mtbHoraFoto.Text).Hour)
+                    if (!string.IsNullOrEmpty(mtbHoraFoto.Text.Replace(":","").Trim()))
+                    {
+                        if (f.LastWriteTime.Hour > DateTime.Parse(mtbHoraFoto.Text).Hour)
+                        {
+                            File.Copy(f.FullName, destino + "\\" + f.Name);
+                            MainInfo.FCInfo().EscreverConsoleLog($"Nome Arquivo: {f.Name}", TipoConsoleLog.Info);
+                            count++;
+                        }
+                    }
+                    else
                     {
                         File.Copy(f.FullName, destino + "\\" + f.Name);
                         MainInfo.FCInfo().EscreverConsoleLog($"Nome Arquivo: {f.Name}", TipoConsoleLog.Info);
                         count++;
-
                     }
                 }
                 FCInfo().EscreverConsoleLog($"Tranferidos: {count}/{total}", TipoConsoleLog.Info);
