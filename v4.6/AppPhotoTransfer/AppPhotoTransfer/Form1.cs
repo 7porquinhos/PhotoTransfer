@@ -138,9 +138,8 @@ namespace AppPhotoTransfer
                             keyValues.Add("OrigemPictures", txtOrigemPersonalizadas.Text);
                             keyValues.Add("DestinoPictures", txtDestino.Text);
                         }));
-                        Loading();
+                        Loading();                
                     }
-
                 }));
                 SalvarDiretorios();
             }
@@ -268,6 +267,7 @@ namespace AppPhotoTransfer
                     }
                 }
                 FCInfo().EscreverConsoleLog($"Tranferidos: {count}/{total}", TipoConsoleLog.Info);
+                FCInfo().EscreverConsoleLog("Finalizada Transferencia: " + destino, TipoConsoleLog.Info);
             }
             catch (Exception ex)
             {
